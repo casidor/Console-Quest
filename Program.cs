@@ -1,16 +1,27 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 namespace Game
 {
     class Hero
     {
-        public List<string> Inventory = new List<string>() {"Іржавий меч","Зілля регенерації", "Яблуко"};
+        public List<string> Inventory;
         public string Name;
-        public int Level = 1;
-        public int MaxHP = 100;
-        public int HP = 100;
-        public int ATK = 10;
+        public int Level;
+        public int MaxHP;
+        public int HP;
+        public int ATK;
+        public Hero(string name)
+        {
+            this.Name = name;
+            this.Level = 1;
+            this.MaxHP = 100;
+            this.HP = 100;
+            this.ATK = 10;
+            this.Inventory = new List<string>() {"Іржавий меч","Зілля регенерації", "Яблуко"};
+        }
         public void ShowStats()
         {
         Console.WriteLine("----------------------");
@@ -38,18 +49,14 @@ namespace Game
         }
         public void Fight()
         {
-            Enemy goblin = new Enemy();
-            goblin.Name = "Гоблін";
-            goblin.MaxHP = 50;
-            goblin.HP = 50;
-            goblin.ATK = 5;
+            Enemy goblin = new Enemy("Гоблін", 50,5);
             Console.WriteLine($"На вас напав {goblin.Name}");
             Random rnd = new Random();
             while(this.HP > 0 && goblin.HP >0)
             {
                 Console.Clear();
                 Console.WriteLine($"Ваш рівень здоров'я {this.MaxHP}/{this.HP}");
-                Console.WriteLine($"Рівень здоров'я {goblin.Name}: {goblin.HP}");
+                Console.WriteLine($"Рівень здоров'я {goblin.Name}: {goblin.MaxHP}/{goblin.HP}");
                 Console.WriteLine("Оберіть дію: 1 - Атакувати | 2 - Спробувати посилену атаку | 3 - Спробувати втекти" );
                 string action = Console.ReadLine();
                 if(action == "1")
@@ -88,17 +95,17 @@ namespace Game
                     this.HP -= goblin.ATK;
                     Console.WriteLine($"{goblin.Name} завдав вам {goblin.ATK} шкоди");
                 }
-                Program.WaitEnter();  
+                UI.WaitEnter("\nНатисніть ENTER для продовження..."); 
             }
-            if(this.HP == 0)
+            if(this.HP <= 0)
             {
                 Console.WriteLine("Ви загнули...");
-                Program.WaitEnter();  
+                UI.WaitEnter("\nНатисніть ENTER для повернення до головного меню...");  
             }
-            else if(goblin.HP == 0)
+            else if(goblin.HP <= 0)
             {
                 Console.WriteLine("Ви перемогли!");
-                Program.WaitEnter();  
+                UI.WaitEnter("\nНатисніть ENTER для повернення до головного меню...");  
             }
         }
     }
@@ -108,55 +115,64 @@ namespace Game
         public int MaxHP;
         public int HP;
         public int ATK;
-    }
-    class Program
-    {
-        public static void WaitEnter()
+        public Enemy(string Name, int MaxHP, int ATK)
         {
-          Console.WriteLine("\n Натисніть ENTER для повернення в головне меню...");
+            this.Name = Name;
+            this.MaxHP = MaxHP;
+            this.HP = MaxHP;
+            this.ATK = ATK;
+        }
+    }
+    class UI
+    {
+        public static void WaitEnter(string message)
+        {
+          Console.WriteLine(message);
           while (Console.ReadKey(true).Key != ConsoleKey.Enter)
           {
 
           }
         }
+    }
+    class Program
+    {
         static void Main ()
         {
-        Hero hero = new Hero();
         Console.WriteLine("Як будуть звати героя цієї подорожі?");
-        hero.Name = Console.ReadLine();
-        while(true)
+        string InputName = Console.ReadLine();
+        Hero hero = new Hero(InputName);
+        bool isRunning = true;
+        while(isRunning)
          {
          Console.Clear();
          Console.WriteLine("-------------------------Головне меню-------------------------");
          Console.WriteLine("Оберіть дію: 1 - Статистика | 2 - Прокачати рівень | 3 - Обшукати ящик | 4 - Піти в ліс | 5 - Вийти" );
          string action = Console.ReadLine();
-         if(action == "1")
-         {
-          Console.Clear();
-          hero.ShowStats();
-          WaitEnter();
-         }
-         else if(action == "2")
-         {
-            Console.Clear();
-            hero.Levelup();
-            WaitEnter();
-         }
-         else if(action == "3")
-         {
-            Console.Clear();
-            hero.FindLoot();
-            WaitEnter();
-         }
-         else if (action == "4")
-         {
-            Console.Clear();
-            hero.Fight();
-         }
-         else if (action == "5")
-         {
-            break;
-         }
+                switch (action)
+                {
+                    case "1":
+                    Console.Clear();
+                    hero.ShowStats();
+                    UI.WaitEnter("\nНатисніть ENTER для повернення до головного меню...");
+                    break;
+                    case "2":
+                    Console.Clear();
+                    hero.Levelup();
+                    UI.WaitEnter("\nНатисніть ENTER для повернення до головного меню...");
+                    break;
+                    case "3":
+                    Console.Clear();
+                    hero.FindLoot();
+                    UI.WaitEnter("\nНатисніть ENTER для повернення до головного меню...");
+                    break;
+                    case "4":
+                    Console.Clear();
+                    hero.Fight();
+                    break;
+                    case "5":
+                    isRunning = false;
+                    break;
+                }   
         }
     }
 }
