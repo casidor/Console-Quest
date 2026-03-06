@@ -8,11 +8,16 @@ namespace Game
         public List<string> Inventory = new List<string>() {"Іржавий меч","Зілля регенерації", "Яблуко"};
         public string Name;
         public int Level = 1;
+        public int MaxHP = 100;
+        public int HP = 100;
+        public int ATK = 10;
         public void ShowStats()
         {
         Console.WriteLine("----------------------");
         Console.WriteLine($"Ім'я героя: {Name}");
         Console.WriteLine($"Рівень героя: {Level}");
+        Console.WriteLine($"Здоров'я героя:{MaxHP}/{HP}");
+        Console.WriteLine($"Сила героя: {ATK}");
         Console.WriteLine($"Ваш інвентар: ");
         foreach (string item in Inventory)
         {
