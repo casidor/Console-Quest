@@ -36,7 +36,8 @@ namespace Game
                     break;
                     case "4":
                     Console.Clear();
-                    hero.Fight();
+                    Battle combat = new Battle();
+                    combat.Fight(hero);
                     break;
                     case "5":
                     isRunning = false;
