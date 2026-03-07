@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.ServerSentEvents;
 namespace Game
 {
     class Hero
     {
-        public List<string> Inventory;
+        public List<Item> Inventory;
         public string Name;
         public int Level;
         public int MaxHP;
@@ -22,7 +23,7 @@ namespace Game
             this.ATK = 10;
             this.EXP = 0;
             this.MaxEXP = 100;
-            this.Inventory = new List<string>() {"Іржавий меч","Зілля регенерації", "Яблуко"};
+            this.Inventory = new List<Item>() {Items.RustySword, Items.Apple, Items.SmallHeal};
         }
         public void ShowStats()
         {
@@ -33,9 +34,9 @@ namespace Game
         Console.WriteLine($"Здоров'я героя:{MaxHP}/{HP}");
         Console.WriteLine($"Сила героя: {ATK}");
         Console.WriteLine($"Ваш інвентар: ");
-        foreach (string item in Inventory)
+        foreach (Item item in Inventory)
         {
-         Console.WriteLine($"- {item}");
+         Console.WriteLine($"- {item.Name} (Сила: {item.Value})");
         }
         }
         public void GainEXP()
@@ -64,9 +65,9 @@ namespace Game
         }
         public void FindLoot()
         {
-        string newItem = ("Тестовий предмет");
+        Item newItem = Items.IronSword;
         Inventory.Add(newItem);
-        Console.WriteLine($"Ви знайшли:{newItem}");
+        Console.WriteLine($"Ви знайшли: {newItem.Name} (Сила: {newItem.Value})");
         }
     }
 }
