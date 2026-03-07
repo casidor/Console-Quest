@@ -11,6 +11,8 @@ namespace Game
         public int MaxHP;
         public int HP;
         public int ATK;
+        public int EXP;
+        public int MaxEXP;
         public Hero(string name)
         {
             this.Name = name;
@@ -18,6 +20,8 @@ namespace Game
             this.MaxHP = 100;
             this.HP = 100;
             this.ATK = 10;
+            this.EXP = 0;
+            this.MaxEXP = 100;
             this.Inventory = new List<string>() {"Іржавий меч","Зілля регенерації", "Яблуко"};
         }
         public void ShowStats()
@@ -25,6 +29,7 @@ namespace Game
         Console.WriteLine("----------------------");
         Console.WriteLine($"Ім'я героя: {Name}");
         Console.WriteLine($"Рівень героя: {Level}");
+        Console.WriteLine($"Досвід героя: {EXP}/{MaxEXP}");
         Console.WriteLine($"Здоров'я героя:{MaxHP}/{HP}");
         Console.WriteLine($"Сила героя: {ATK}");
         Console.WriteLine($"Ваш інвентар: ");
@@ -33,11 +38,29 @@ namespace Game
          Console.WriteLine($"- {item}");
         }
         }
+        public void GainEXP()
+        {
+            int XP = 50;
+            EXP += XP;
+            Console.WriteLine("-----------------");
+            Console.WriteLine($"Ви отримали {XP} досвіду!");
+            if(EXP >= MaxEXP)
+            {
+                Levelup();
+            }
+        }
         public void Levelup()
         {
         Level ++; 
+        MaxHP += 20;
+        ATK += 5;
+        HP = MaxHP;
+        EXP -= MaxEXP;
+        MaxEXP += 50;
         Console.WriteLine("-----------------");
-        Console.WriteLine("Рівень підвищено!");
+        Console.WriteLine($"Рівень підвищено! Ваші характеристики тепер:");
+        Console.WriteLine($"Ваш рівень здоров'я {MaxHP}/{HP}");
+        Console.WriteLine($"Сила героя: {ATK}");
         }
         public void FindLoot()
         {

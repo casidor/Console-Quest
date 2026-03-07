@@ -26,7 +26,7 @@ namespace Game
                     break;
                     case "2":
                     Console.Clear();
-                    hero.Levelup();
+                    hero.GainEXP();
                     UI.WaitEnter("\nНатисніть ENTER для повернення до головного меню...");
                     break;
                     case "3":
