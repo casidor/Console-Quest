@@ -39,12 +39,11 @@ namespace Game
          Console.WriteLine($"- {item.Name} (Сила: {item.Value})");
         }
         }
-        public void GainEXP()
+        public void GainEXP(int expGained)
         {
-            int XP = 50;
-            EXP += XP;
+            EXP += expGained;
             Console.WriteLine("-----------------");
-            Console.WriteLine($"Ви отримали {XP} досвіду!");
+            Console.WriteLine($"Ви отримали {expGained} досвіду!");
             if(EXP >= MaxEXP)
             {
                 Levelup();

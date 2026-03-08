@@ -82,6 +82,7 @@ namespace Game
             else if(enemy.HP <= 0)
             {
                 Console.WriteLine("Ви перемогли!");
+                hero.GainEXP(enemy.expGained);
                 UI.WaitEnter("\nНатисніть ENTER для повернення до головного меню...");  
             }
         }

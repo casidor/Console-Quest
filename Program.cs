@@ -15,7 +15,7 @@ namespace Game
          {
          Console.Clear();
          Console.WriteLine("-------------------------Головне меню-------------------------");
-         Console.WriteLine("Оберіть дію: 1 - Статистика | 2 - Прокачати рівень | 3 - Обшукати ящик | 4 - Піти в ліс | 5 - Вийти" );
+         Console.WriteLine("Оберіть дію: 1 - Статистика | 2 - Обшукати ящик | 3 - Піти в ліс | 4 - Вийти" );
          string action = Console.ReadLine() ?? "";
                 switch (action)
                 {
@@ -26,21 +26,16 @@ namespace Game
                     break;
                     case "2":
                     Console.Clear();
-                    hero.GainEXP();
-                    UI.WaitEnter("\nНатисніть ENTER для повернення до головного меню...");
-                    break;
-                    case "3":
-                    Console.Clear();
                     hero.FindLoot();
                     UI.WaitEnter("\nНатисніть ENTER для повернення до головного меню...");
                     break;
-                    case "4":
+                    case "3":
                     Console.Clear();
                     Enemy enemy = Enemies.Goblin;
                     Battle combat = new Battle();
                     combat.Fight(hero, enemy);
                     break;
-                    case "5":
+                    case "4":
                     isRunning = false;
                     break;
                 }   

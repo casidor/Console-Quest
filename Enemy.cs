@@ -8,14 +8,16 @@ namespace Game
         public string Name;
         public int MaxHP;
         public int HP;
+        public int expGained;
         public int minATK;
         public int maxATK;
         public int Crit;
-        public Enemy(string Name, int MaxHP, int minATK, int maxATK, int Crit)
+        public Enemy(string Name, int MaxHP, int expGained, int minATK, int maxATK, int Crit)
         {
             this.Name = Name;
             this.MaxHP = MaxHP;
             this.HP = MaxHP;
+            this.expGained = expGained;
             this.minATK = minATK;
             this.maxATK = maxATK;
             this.Crit = Crit;
@@ -34,6 +36,6 @@ namespace Game
     }
     public static class Enemies
     {
-        public static Enemy Goblin => new Enemy("Гоблін", 50, 5, 7, 40);
+        public static Enemy Goblin => new Enemy("Гоблін", 50, 15, 5, 7, 40);
     }
 }
