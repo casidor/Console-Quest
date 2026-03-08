@@ -36,8 +36,9 @@ namespace Game
                     break;
                     case "4":
                     Console.Clear();
+                    Enemy enemy = Enemies.Goblin;
                     Battle combat = new Battle();
-                    combat.Fight(hero);
+                    combat.Fight(hero, enemy);
                     break;
                     case "5":
                     isRunning = false;
