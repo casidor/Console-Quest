@@ -31,7 +31,7 @@ namespace Game
         Console.WriteLine($"Ім'я героя: {Name}");
         Console.WriteLine($"Рівень героя: {Level}");
         Console.WriteLine($"Досвід героя: {EXP}/{MaxEXP}");
-        Console.WriteLine($"Здоров'я героя:{MaxHP}/{HP}");
+        Console.WriteLine($"Здоров'я героя:{HP}/{MaxHP}");
         Console.WriteLine($"Сила героя: {ATK}");
         Console.WriteLine($"Ваш інвентар: ");
         foreach (Item item in Inventory)
@@ -60,7 +60,7 @@ namespace Game
         MaxEXP += 50;
         Console.WriteLine("-----------------");
         Console.WriteLine($"Рівень підвищено! Ваші характеристики тепер:");
-        Console.WriteLine($"Ваш рівень здоров'я {MaxHP}/{HP}");
+        Console.WriteLine($"Ваш рівень здоров'я {HP}/{MaxHP}");
         Console.WriteLine($"Сила героя: {ATK}");
         }
         public void FindLoot()
