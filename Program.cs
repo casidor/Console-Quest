@@ -8,7 +8,7 @@ namespace Game
         static void Main ()
         {
         Console.WriteLine("Як будуть звати героя цієї подорожі?");
-        string InputName = Console.ReadLine();
+        string InputName = Console.ReadLine() ?? "Герой";
         Hero hero = new Hero(InputName);
         bool isRunning = true;
         while(isRunning)
@@ -16,7 +16,7 @@ namespace Game
          Console.Clear();
          Console.WriteLine("-------------------------Головне меню-------------------------");
          Console.WriteLine("Оберіть дію: 1 - Статистика | 2 - Прокачати рівень | 3 - Обшукати ящик | 4 - Піти в ліс | 5 - Вийти" );
-         string action = Console.ReadLine();
+         string action = Console.ReadLine() ?? "";
                 switch (action)
                 {
                     case "1":
