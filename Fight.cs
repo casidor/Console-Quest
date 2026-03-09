@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Formats.Asn1;
+using System.Linq.Expressions;
 using System.Threading;
 namespace Game
 {
-    class Battle
+    public class Battle
     {
         public void Fight(Hero hero, Enemy enemy)
         {
@@ -17,8 +18,9 @@ namespace Game
                 Console.Clear();
                 Console.WriteLine($"Ваш рівень здоров'я {hero.HP}/{hero.MaxHP}");
                 Console.WriteLine($"Рівень здоров'я {enemy.Name}: {enemy.HP}/{enemy.MaxHP}");
-                Console.WriteLine("Оберіть дію: 1 - Атакувати | 2 - Спробувати посилену атаку | 3 - Спробувати втекти" );
+                Console.WriteLine("Оберіть дію: 1 - Атакувати | 2 - Спробувати посилену атаку | 3 - Використати предмет | 4 - Спробувати втекти" );
                 string action = Console.ReadLine() ?? "";
+                bool skipTurn = false;
                 switch (action)
                 {
                     case "1":
@@ -41,6 +43,16 @@ namespace Game
                     }
                     break;
                     case "3":
+                    if(UI.UseItemFromInventory(hero))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            skipTurn = true;
+                        }
+                    break;
+                    case "4":
                     int chanceESC = rnd.Next(1, 3);
                     if(chanceESC == 1)
                     {
@@ -59,14 +71,14 @@ namespace Game
                     Thread.Sleep(1000);
                     continue;
                 }
-                if(enemy.HP > 0 && !Escaped)
+                if(enemy.HP > 0 && !Escaped && !skipTurn)
                 {
                     int damage = enemy.GetDMG(rnd);
                     hero.HP -= damage;
                     Console.WriteLine($"{enemy.Name} завдав вам {damage} шкоди");
                     Thread.Sleep(1000);
                 }
-                if(hero.HP > 0 && enemy.HP >0 && !Escaped){
+                if(hero.HP > 0 && enemy.HP >0 && !Escaped && !skipTurn){
                     UI.WaitEnter("\nНатисніть ENTER для продовження..."); 
                 }
             }

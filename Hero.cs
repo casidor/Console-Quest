@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.ServerSentEvents;
+using System.Threading;
 namespace Game
 {
-    class Hero
+    public class Hero
     {
         public List<Item> Inventory;
         public string Name;
@@ -33,11 +34,7 @@ namespace Game
         Console.WriteLine($"Досвід героя: {EXP}/{MaxEXP}");
         Console.WriteLine($"Здоров'я героя:{HP}/{MaxHP}");
         Console.WriteLine($"Сила героя: {ATK}");
-        Console.WriteLine($"Ваш інвентар: ");
-        foreach (Item item in Inventory)
-        {
-         Console.WriteLine($"- {item.Name} (Сила: {item.Value})");
-        }
+        UI.ShowInventory(Inventory);
         }
         public void GainEXP(int expGained)
         {
@@ -67,6 +64,33 @@ namespace Game
         Item newItem = Items.IronSword;
         Inventory.Add(newItem);
         Console.WriteLine($"Ви знайшли: {newItem.Name} (Сила: {newItem.Value})");
+        }
+        public bool UseItem(Item item)
+        {
+            if(item.Type == ItemType.Heal)
+            {
+                if(HP == MaxHP)
+                {
+                Console.WriteLine("Ви вже повністю здорові!"); 
+                Thread.Sleep(1000);
+                return false;
+                }
+                else
+                {
+                    HP = Math.Min(HP + item.Value, MaxHP);
+                    Console.WriteLine($"Ви відновили {item.Value} здоров'я!");
+                    Console.WriteLine($"Ваш рівень здоров'я {HP}/{MaxHP}");
+                    Inventory.Remove(item);
+                    Thread.Sleep(1000);
+                    return true;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Ви не можете це використати зараз");
+                Thread.Sleep(1000);
+                return false;
+            }
         }
     }
 }

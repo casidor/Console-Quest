@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 namespace Game
 {
-    class UI
+    public class UI
     {
         public static void WaitEnter(string message)
         {
@@ -12,6 +12,52 @@ namespace Game
           {
 
           }
+        }
+        public static void ShowInventory(List<Item> items)
+        {
+            Console.WriteLine($"Ваш інвентар: ");
+            for(int i = 0; i < items.Count; i++)
+            {
+                Console.WriteLine($"{i + 1} {items[i].Name} (Сила: {items[i].Value})");
+            }
+        }
+        public static bool UseItemFromInventory(Hero hero)
+        {
+            while (true)
+            {
+            Console.Clear();
+            ShowInventory(hero.Inventory);
+            Console.WriteLine("Оберіть предмет: | 0 - Назад");
+            int choice;
+            string input = Console.ReadLine() ?? "";
+            bool check = int.TryParse(input,out choice);
+            if (check)
+            {
+                if(choice > 0 && choice <= hero.Inventory.Count)
+                    {
+                        Item picked = hero.Inventory[choice - 1];
+                        bool used = hero.UseItem(picked);
+                            if (used)
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                    }
+                    else if(choice == 0)
+                    {
+                        return false;
+                    }
+            }
+            else
+            {
+               Console.WriteLine("Невідома дія");
+               Thread.Sleep(1000);
+               continue;
+            }
+            }
         }
     }
 }
