@@ -14,7 +14,7 @@ namespace Game
         while(isRunning)
          {
          Console.Clear();
-         Console.WriteLine("-------------------------Головне меню-------------------------");
+         Console.WriteLine("------------------------- Головне меню-------------------------");
          Console.WriteLine("Оберіть дію: 1 - Статистика | 2 - Обшукати ящик | 3 - Піти в ліс | 4 - Вийти" );
          string action = Console.ReadLine() ?? "";
                 switch (action)
@@ -31,7 +31,8 @@ namespace Game
                     break;
                     case "3":
                     Console.Clear();
-                    Enemy enemy = Enemies.Goblin;
+                    Random rnd = new Random();
+                    Enemy enemy = Enemies.AllEnemies[rnd.Next(Enemies.AllEnemies.Count)];
                     Battle combat = new Battle();
                     combat.Fight(hero, enemy);
                     break;

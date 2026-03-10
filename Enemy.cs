@@ -34,8 +34,12 @@ namespace Game
           return ATK;
         }
     }
-    public static class Enemies
+    public class Enemies
     {
-        public static Enemy Goblin => new Enemy("Гоблін", 50, 15, 5, 7, 40);
+        public static Enemy Goblin => new Enemy("Гоблін", 50, 15, 5, 7, 10);
+        public static Enemy Ork => new Enemy("Орк", 70, 20, 5, 12, 20);
+        public static Enemy Skeleton => new Enemy("Скелет", 50, 25, 4, 9, 15);
+        public static Enemy Golem => new Enemy("Голем", 100, 30, 2, 5, 20);
+        public static List<Enemy> AllEnemies = new List<Enemy> (){Goblin, Ork, Skeleton, Golem};
     }
 }
