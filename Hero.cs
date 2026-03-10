@@ -34,7 +34,6 @@ namespace Game
         Console.WriteLine($"Досвід героя: {EXP}/{MaxEXP}");
         Console.WriteLine($"Здоров'я героя:{HP}/{MaxHP}");
         Console.WriteLine($"Сила героя: {ATK}");
-        UI.ShowInventory(Inventory);
         }
         public void GainEXP(int expGained)
         {
@@ -67,7 +66,7 @@ namespace Game
         }
         public bool UseItem(Item item)
         {
-            if(item.Type == ItemType.Heal)
+            if(item.Type == ItemType.Heal || item.Type == ItemType.Food)
             {
                 if(HP == MaxHP)
                 {

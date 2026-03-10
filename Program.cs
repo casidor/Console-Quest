@@ -15,7 +15,7 @@ namespace Game
          {
          Console.Clear();
          Console.WriteLine("------------------------- Головне меню-------------------------");
-         Console.WriteLine("Оберіть дію: 1 - Статистика | 2 - Обшукати ящик | 3 - Піти в ліс | 4 - Вийти" );
+         Console.WriteLine("Оберіть дію: 1 - Статистика | 2 - Інвентар | 3 - Обшукати ящик | 4 - Піти в ліс | 5 - Вийти" );
          string action = Console.ReadLine() ?? "";
                 switch (action)
                 {
@@ -25,18 +25,21 @@ namespace Game
                     UI.WaitEnter("\nНатисніть ENTER для повернення до головного меню...");
                     break;
                     case "2":
+                    UI.OpenInventory(hero);
+                    break;
+                    case "3":
                     Console.Clear();
                     hero.FindLoot();
                     UI.WaitEnter("\nНатисніть ENTER для повернення до головного меню...");
                     break;
-                    case "3":
+                    case "4":
                     Console.Clear();
                     Random rnd = new Random();
                     Enemy enemy = Enemies.AllEnemies[rnd.Next(Enemies.AllEnemies.Count)];
                     Battle combat = new Battle();
                     combat.Fight(hero, enemy);
                     break;
-                    case "4":
+                    case "5":
                     isRunning = false;
                     break;
                 }   
