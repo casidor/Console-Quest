@@ -95,6 +95,7 @@ namespace Game
             {
                 Console.WriteLine("Ви перемогли!");
                 hero.GainEXP(enemy.expGained);
+                hero.UsesLeft = 3;
                 UI.WaitEnter("\nНатисніть ENTER для повернення до головного меню...");  
             }
         }

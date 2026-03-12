@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 namespace Game
 {
-    class Program
+    public class Program
     {
-        static void Main ()
+        public static void Main ()
         {
         Console.WriteLine("Як будуть звати героя цієї подорожі?");
         string InputName = Console.ReadLine() ?? "Герой";
@@ -29,7 +30,15 @@ namespace Game
                     break;
                     case "3":
                     Console.Clear();
-                    hero.FindLoot();
+                    if(hero.UsesLeft > 0)
+                        {
+                            hero.FindLoot();
+                            hero.UsesLeft --; 
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ящик порожній. Схоже він загадковим чином наповнюється після битв :)");
+                        }
                     UI.WaitEnter("\nНатисніть ENTER для повернення до головного меню...");
                     break;
                     case "4":

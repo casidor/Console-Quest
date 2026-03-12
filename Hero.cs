@@ -15,6 +15,7 @@ namespace Game
         public int ATK;
         public int EXP;
         public int MaxEXP;
+        public int UsesLeft = 0;
         public Hero(string name)
         {
             this.Name = name;
@@ -60,9 +61,41 @@ namespace Game
         }
         public void FindLoot()
         {
-        Item newItem = Items.IronSword;
-        Inventory.Add(newItem);
-        Console.WriteLine($"Ви знайшли: {newItem.Name} (Сила: {newItem.Value})");
+            List<LootEntry> loot = new List<LootEntry>
+            {
+                new LootEntry(Items.Apple, 40),
+                new LootEntry(Items.SmallHeal, 30),
+                new LootEntry(Items.IronSword, 10),
+                new LootEntry(null, 20)
+            };
+            int TotalWeight = 0;
+            foreach(LootEntry entry in loot)
+            {
+                TotalWeight += entry.Weight;
+            }
+            Random rnd = new Random();
+            int choice = rnd.Next(1, TotalWeight);
+            foreach(LootEntry entry in loot)
+            {
+                choice -= entry.Weight;
+                if(choice <= 0)
+                {
+                    Item? newItem = entry.item;
+                    if(newItem != null)
+                    {
+                        Inventory.Add(newItem);
+                        Console.WriteLine($"Ви знайшли: {newItem.Name} (Сила: {newItem.Value})");
+                        Thread.Sleep(1000);  
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ящик порожній. Спробуйте ще :)");
+                        Thread.Sleep(2000);
+                        break;
+                    }
+                }
+            }
         }
         public bool UseItem(Item item)
         {

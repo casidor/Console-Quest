@@ -25,4 +25,14 @@ namespace Game
         public static Item SmallHeal => new Item("Маленьке зілля лікування", 201, ItemType.Heal, 20);
         public static Item IronSword => new Item("Залізний меч", 102, ItemType.Weapon, 10);
     }
+    public class LootEntry
+    {
+        public Item? item;
+        public int Weight;
+        public LootEntry(Item item, int weight)
+        {
+            this.item = item;
+            this.Weight = weight;
+        }
+    }
 }
