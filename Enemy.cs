@@ -3,15 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 namespace Game
 {
-    public class Enemy
+    public class Enemy : Creature
     {
-        public string Name;
-        public int MaxHP;
-        public int HP;
-        public int expGained;
-        public int minATK;
-        public int maxATK;
-        public int Crit;
+        public int expGained{ get; private set; }
+        public int minATK{ get; private set; }
+        public int maxATK{ get; private set; }
+        public int Crit{ get; private set; }
         public Enemy(string Name, int MaxHP, int expGained, int minATK, int maxATK, int Crit)
         {
             this.Name = Name;
@@ -22,7 +19,7 @@ namespace Game
             this.maxATK = maxATK;
             this.Crit = Crit;
         }
-        public int GetDMG(Random rnd)
+        public int GetCritDMG(Random rnd)
         {
           int ATK = rnd.Next(minATK, maxATK + 1);
           int CritChance = rnd.Next(1, 101);

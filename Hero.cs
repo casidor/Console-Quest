@@ -5,16 +5,13 @@ using System.Net.ServerSentEvents;
 using System.Threading;
 namespace Game
 {
-    public class Hero
+    public class Hero : Creature
     {
         public List<Item> Inventory;
-        public string Name;
-        public int Level;
-        public int MaxHP;
-        public int HP;
-        public int ATK;
-        public int EXP;
-        public int MaxEXP;
+        public int Level{ get; private set; }
+        public int ATK{ get; private set; }
+        public int EXP{ get; private set; }
+        public int MaxEXP{ get; private set; }
         public int UsesLeft = 0;
         public Hero(string name)
         {

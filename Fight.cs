@@ -24,7 +24,7 @@ namespace Game
                 switch (action)
                 {
                     case "1":
-                    enemy.HP -= hero.ATK;
+                    enemy.TakeDamage(hero.ATK);
                     Console.WriteLine($"Ви нанесли {hero.ATK} шкоди ворогу!");
                     Thread.Sleep(1000);
                     break;
@@ -32,7 +32,7 @@ namespace Game
                     int chanceCRIT = rnd.Next(1, 3);
                     if(chanceCRIT == 1)
                     {
-                        enemy.HP -= hero.ATK*2;
+                        enemy.TakeDamage(hero.ATK*2);
                         Console.WriteLine($"Критичний удар! Ви нанесли {hero.ATK * 2} шкоди!");
                         Thread.Sleep(1000);
                     }
@@ -73,8 +73,8 @@ namespace Game
                 }
                 if(enemy.HP > 0 && !Escaped && !skipTurn)
                 {
-                    int damage = enemy.GetDMG(rnd);
-                    hero.HP -= damage;
+                    int damage = enemy.GetCritDMG(rnd);
+                    hero.TakeDamage(damage);
                     Console.WriteLine($"{enemy.Name} завдав вам {damage} шкоди");
                     Thread.Sleep(1000);
                 }
