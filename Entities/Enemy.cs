@@ -19,14 +19,15 @@ namespace Game
             this.maxATK = maxATK;
             this.Crit = Crit;
         }
-        public int GetCritDMG(Random rnd)
+        public int GetCritDMG(Random rnd, out bool IsCrit)
         {
           int ATK = rnd.Next(minATK, maxATK + 1);
           int CritChance = rnd.Next(1, 101);
+          IsCrit = false;
           if(CritChance <= Crit)
             {
                 ATK *= 2;
-                Console.WriteLine($"{Name} завдає КРИТИЧНОГО удару!");
+                IsCrit = true;
             }
           return ATK;
         }

@@ -65,8 +65,12 @@ namespace UI
         }
         public static void RenderEnemyTurn(EnemyDTO enemy, ActionDTO dto)
         {
-            Console.WriteLine($"{enemy.Name} завдав вам {dto.Damage} шкоди");
-            Thread.Sleep(1000);
+            if (dto.IsCrit)
+            {
+                Console.WriteLine($"{enemy.Name} завдає КРИТИЧНОГО удару!");
+            }
+                Console.WriteLine($"{enemy.Name} завдав вам {dto.Damage} шкоди");
+                Thread.Sleep(1000);
         }
         public static void RenderVictory() => Console.WriteLine("Ви перемогли!");
         public static void RenderDefeat() => Console.WriteLine("Ви загинули...");

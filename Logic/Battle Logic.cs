@@ -59,9 +59,9 @@ namespace Battle
         }
         public static ActionDTO EnemyTurn(Hero hero, Enemy enemy, Random rnd)
         {
-            int damage = enemy.GetCritDMG(rnd);
+            int damage = enemy.GetCritDMG(rnd, out bool Crit);
             hero.TakeDamage(damage);
-            return new ActionDTO { Damage = damage };
+            return new ActionDTO { Damage = damage, IsCrit = Crit };
         }
         public static void Victory(Hero hero, Enemy enemy)
         {

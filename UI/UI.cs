@@ -13,6 +13,26 @@ namespace Game
 
             }
         }
+        public static void ShowHeroStats(Hero hero)
+        {
+            Console.WriteLine("----------------------");
+            Console.WriteLine($"Ім'я героя: {hero.Name}");
+            Console.WriteLine($"Рівень героя: {hero.Level}");
+            Console.WriteLine($"Досвід героя: {hero.EXP}/{hero.MaxEXP}");
+            Console.WriteLine($"Здоров'я героя:{hero.HP}/{hero.MaxHP}");
+            Console.WriteLine($"Сила героя: {hero.ATK}");
+        }
+        public static void ShowEXPGained(int EXP)
+        {
+            Console.WriteLine("-----------------");
+            Console.WriteLine($"Ви отримали {EXP} досвіду!");
+        }
+        public static void ShowLevelUP(Hero hero){
+        Console.WriteLine("-----------------");
+        Console.WriteLine($"Рівень підвищено! Ваші характеристики тепер:");
+        Console.WriteLine($"Ваш рівень здоров'я {hero.HP}/{hero.MaxHP}");
+        Console.WriteLine($"Сила героя: {hero.ATK}");
+        }
         public static void ShowInventory(List<Item> items)
         {
             Console.WriteLine($"Ваш інвентар: ");

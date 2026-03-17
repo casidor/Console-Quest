@@ -29,7 +29,7 @@ namespace Game
     {
         public Item? item;
         public int Weight;
-        public LootEntry(Item item, int weight)
+        public LootEntry(Item? item, int weight)
         {
             this.item = item;
             this.Weight = weight;
