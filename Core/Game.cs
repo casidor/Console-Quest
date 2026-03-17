@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Battle;
+using UI;
 namespace Game
 {
     public class GameCore
@@ -16,18 +18,19 @@ namespace Game
         {
             while (isRunning)
             {
-                UI.MainMenuAction action = UI.GetMainMenuAction(hero);
+                MainMenu.ShowMainMenu();
+                MainMenu.MainMenuAction action = MainMenu.GetMainMenuAction(hero);
                 switch (action)
                 {
-                    case UI.MainMenuAction.ShowStats:
+                    case MainMenu.MainMenuAction.ShowStats:
                         Console.Clear();
                         hero.ShowStats();
                         UI.WaitEnter("\nНатисніть ENTER для повернення до головного меню...");
                         break;
-                    case UI.MainMenuAction.Inventory:
+                    case MainMenu.MainMenuAction.Inventory:
                         UI.OpenInventory(hero);
                         break;
-                    case UI.MainMenuAction.Chest:
+                    case MainMenu.MainMenuAction.Chest:
                         Console.Clear();
                         if (hero.UsesLeft > 0)
                         {
@@ -40,14 +43,14 @@ namespace Game
                         }
                         UI.WaitEnter("\nНатисніть ENTER для повернення до головного меню...");
                         break;
-                    case UI.MainMenuAction.GoToForest:
+                    case MainMenu.MainMenuAction.GoToForest:
                         Console.Clear();
                         Random rnd = new Random();
                         Enemy enemy = Enemies.AllEnemies[rnd.Next(Enemies.AllEnemies.Count)];
-                        Battle combat = new Battle();
-                        combat.Fight(hero, enemy);
+                        BattleController combat = new BattleController();
+                        combat.BattleMode(hero, enemy);
                         break;
-                    case UI.MainMenuAction.Exit:
+                    case MainMenu.MainMenuAction.Exit:
                         isRunning = false;
                         break;
                 }
