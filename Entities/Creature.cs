@@ -3,7 +3,7 @@ namespace Game
 {
     public abstract class Creature
     {
-        public string Name{ get; set; }
+        public string? Name { get; protected set; }
         private int _HP;
         public int MaxHP{ get; protected set; }
         public int HP

@@ -24,7 +24,7 @@ namespace Game
                 {
                     case MainMenu.MainMenuAction.ShowStats:
                         Console.Clear();
-                        UI.ShowHeroStats(hero);
+                        HeroUI.ShowHeroStats(hero);
                         UI.WaitEnter("\nНатисніть ENTER для повернення до головного меню...");
                         break;
                     case MainMenu.MainMenuAction.Inventory:

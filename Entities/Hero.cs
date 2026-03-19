@@ -13,8 +13,9 @@ namespace Game
         public int EXP{ get; private set; }
         public int MaxEXP{ get; private set; }
         public int UsesLeft = 0;
-        public event Action<Hero>? OnLevelUP;
+        public event Action? OnLevelUP;
         public event Action<int>? OnEXPGained;
+        public event Action<bool, int>? OnHealed;
         public Hero(string name)
         {
             this.Name = name;
@@ -46,7 +47,21 @@ namespace Game
         HP = MaxHP;
         EXP -= MaxEXP;
         MaxEXP += 50;
-        OnLevelUP?.Invoke(this);
+        OnLevelUP?.Invoke();
+        }
+        public bool Heal(int HealAmount)
+        {
+            if( HP == MaxHP)
+            {
+                OnHealed?.Invoke(false, HealAmount);
+                return false;
+            }
+            else
+            {
+                HP += HealAmount;
+                OnHealed?.Invoke(true, HealAmount);
+                return true;
+            }
         }
         public void FindLoot()
         {
